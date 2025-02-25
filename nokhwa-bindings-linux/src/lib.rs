@@ -187,6 +187,28 @@ mod internal {
             index,
         });
 
+        // Last check to be sure that every devices have a unique index
+        // and that the data isn't corrupted
+        if devices.len() > 1 {
+            let set: std::collections::HashSet<_> = devices.iter().map(|dev| dev.index).collect();
+            assert_eq!(
+                set.len(),
+                devices.len(),
+                "Device list should not contain duplicate indexes"
+            );
+            /*
+            BUG : https://github.com/l1npengtul/nokhwa/issues/164
+            assert_eq!(
+                devices
+                    .windows(2)
+                    .filter(|window| window[0].index == window[1].index)
+                    .count(),
+                devices.len(),
+                "Device list should not contain duplicate indexes"
+            );
+             */
+        }
+
         Ok(device)
     }
 
