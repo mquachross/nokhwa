@@ -195,7 +195,7 @@ impl CallbackCamera {
     /// # Errors
     /// If you started the stream and the camera rejects the new resolution, this will return an error.
     pub fn set_resolution(&mut self, new_res: Resolution) -> Result<(), NokhwaError> {
-        println!("Setting resolution {}", resolution.to_string());
+        println!("Setting resolution {}", new_res.to_string());
         *self
             .last_frame_captured
             .lock()
